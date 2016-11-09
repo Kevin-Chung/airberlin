@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AirBerlin</string>
+    <string name="hint_email">Enter email</string>
+    <string name="hint_password">Enter password</string>
+</resources>

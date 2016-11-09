@@ -1,0 +1,46 @@
+challenge 1 at the airport
+	amenities 
+		time for a sandwich?
+		order one and have it delivered?
+	time
+		waiting is bad (duh)
+		assess stress levels experienced by passengers
+		get guests to buy more stuff at the airport, entertainment,comfort traveling
+
+	gamification
+	location services
+	lots of partners to and from the airport
+
+
+corporate customers
+	make flying and booking much easier
+	easier to change flights due to long meetings or unexpected events
+	flights are delayed : requires shuffling meeting plans
+
+
+
+
+
+
+
+
+
+
+
+Ideas:
+Some automated way to find out if people who are willing to give up their airline ticket to those who really need it in return for some ameneties, later free flight, hotels, maybe a seat upgrade. System doesn't exist we'd have to make it
+
+	create the system
+		xapix api for flights / bookings
+
+
+
+
+
+
+
+automated replies / rescheduling for meetings that you may miss when you get a flight delayed + automated hotel / taxi bookings
+
+	xapix api for flights / bookings
+	google calendar api
+
