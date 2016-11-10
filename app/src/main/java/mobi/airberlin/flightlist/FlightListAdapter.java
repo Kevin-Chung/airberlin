@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import mobi.airberlin.FlightModel;
 import mobi.airberlin.R;
 
 /**
@@ -13,22 +14,29 @@ import mobi.airberlin.R;
  */
 
 public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightListHolder> {
-    private String[] mDataset;
+    private FlightModel[] myFlightData;
 
     public static class FlightListHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView;
+        public TextView pointATextView;
+        public TextView pointBTextView;
+        public TextView flightDepartureTimeView;
+        public TextView flightDepartureDateView;
         public FlightListHolder(View v) {
             super(v);
-            mTextView =(TextView) v.findViewById(R.id.flight_list_from);
+            pointATextView =(TextView) v.findViewById(R.id.flight_list_from);
+            pointBTextView=(TextView) v.findViewById(R.id.flight_list_to);
+            flightDepartureDateView = (TextView) v.findViewById(R.id.flight_list_date);
+            flightDepartureTimeView = (TextView) v.findViewById(R.id.flight_list_time);
         }
 
         //TODO:potentially add setter function here
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public FlightListAdapter(String[] myDataset) {
-        mDataset = myDataset;
+    public FlightListAdapter(FlightModel[] myFlightData)
+    {
+        this.myFlightData = myFlightData;
     }
 
     // Create new views (invoked by the layout manager)
@@ -49,14 +57,17 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
 
         //TODO:potentially add setters to the holder class
         //TODO:actually set data based on the class given to me
-        holder.mTextView.setText(mDataset[position]);
+        holder.pointATextView.setText(myFlightData[position].getDestinationA());
+        holder.pointBTextView.setText(myFlightData[position].getDestingationB());
+        holder.flightDepartureTimeView.setText(myFlightData[position].getFlightTime().toString());
+        holder.flightDepartureDateView.setText(myFlightData[position].getFlightDate().toString());
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataset.length;
+        return myFlightData.length;
     }
 
 }

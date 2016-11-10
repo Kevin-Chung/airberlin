@@ -9,10 +9,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import mobi.airberlin.FlightModel;
 import mobi.airberlin.R;
 
 public class FlightListActivity extends AppCompatActivity {
-
+    FlightModel[] myFLightData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,10 +31,10 @@ public class FlightListActivity extends AppCompatActivity {
 
         // specify an adapter (see also next example)
         //TODO::Need some sort of class that holds flight data problably.
-        /*
-        mAdapter = new FlightListAdapter(myDataset);
+
+        myFLightData = (FlightModel[])savedInstanceState.getSerializable("flightData");
+        mAdapter = new FlightListAdapter(myFLightData);
         mRecyclerView.setAdapter(mAdapter);
-        */
 
 
 
