@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
     android:id="@+id/activity_flight_information"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,108 +13,167 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="mobi.airberlin.FlightInformation">
+    android:orientation="vertical"
+    >
 
-    <EditText
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FROM"
+            android:id="@+id/flight_list_from"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
+            android:textSize="24sp"
+            android:textColor="#000000"/>
+        <ImageView
+            android:layout_width="24sp"
+            android:layout_height="24sp"
+            app:srcCompat="@drawable/ic_chec_right"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/flight_list_to"
+            android:text="TO"
+            android:textSize="24sp"
+            android:textColor="#000000"/>
+    </LinearLayout>
 
-    <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="26dp"
-        android:layout_below="@+id/editText2"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:background="#000000"
+        ></View>
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/alert_dark_frame"
-        android:id="@+id/imageView"
-        android:layout_alignTop="@+id/button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp" />
+        >
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
-        android:id="@+id/editText3" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_warning_24dp"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_below="@+id/editText3"
-        android:layout_alignRight="@+id/editText3"
-        android:layout_alignEnd="@+id/editText3"
-        android:layout_marginTop="32dp"
-        android:id="@+id/editText4" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Flight"
+            android:layout_gravity="right"
+            android:id="@+id/change_flight"/>
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="1dp"
+        android:layout_marginBottom="15dp"
+        android:background="#000000"
+        ></View>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
+        android:text="flight_time"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_marginTop="26dp"
-        android:id="@+id/editText5"
-        android:layout_below="@+id/editText4"
-        android:layout_alignLeft="@+id/editText4"
-        android:layout_alignStart="@+id/editText4" />
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
+        android:text="flight_time"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_below="@+id/editText5"
-        android:layout_alignLeft="@+id/editText5"
-        android:layout_alignStart="@+id/editText5"
-        android:layout_marginTop="23dp"
-        android:id="@+id/editText6" />
+        android:id="@+id/flight_date"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
 
-    <EditText
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_height="1dp"
+        android:background="#000000"
+        ></View>
+
+    <TextView
         android:layout_width="wrap_content"
+        android:text="flight_price"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/editText6"
-        android:layout_alignEnd="@+id/editText6"
-        android:id="@+id/editText7" />
-</RelativeLayout>
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="flight_time"
+        android:layout_height="wrap_content"
+        android:id="@+id/flight_price"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_height="1dp"
+        android:background="#000000"
+        ></View>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="flight_seat"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="flight_time"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/flight_seat"
+        />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_height="1dp"
+        android:background="#000000"
+        ></View>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="flight_plane"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="flight_time"
+        android:layout_height="wrap_content"
+        android:id="@+id/flight_plane"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+</LinearLayout>
+</ScrollView>

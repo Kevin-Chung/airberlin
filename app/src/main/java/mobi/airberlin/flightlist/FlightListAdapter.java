@@ -1,5 +1,7 @@
 package mobi.airberlin.flightlist;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import mobi.airberlin.FlightInformation;
 import mobi.airberlin.FlightModel;
 import mobi.airberlin.R;
 
@@ -21,7 +24,7 @@ import mobi.airberlin.R;
 public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightListHolder> {
     private ArrayList<FlightModel> myFlightData;
 
-    public static class FlightListHolder extends RecyclerView.ViewHolder {
+    public class FlightListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         // each data item is just a string in this case
         public TextView pointATextView;
         public TextView pointBTextView;
@@ -33,6 +36,15 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
             pointBTextView=(TextView) v.findViewById(R.id.flight_list_to);
             flightDepartureDateView = (TextView) v.findViewById(R.id.flight_list_date);
             flightDepartureTimeView = (TextView) v.findViewById(R.id.flight_list_time);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            Snackbar.make(v,"yo",Snackbar.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), FlightInformation.class);
+            intent.putExtra("flightmodel",myFlightData.get(getLayoutPosition()));
+            v.getContext().startActivity(intent);
         }
 
         //TODO:potentially add setter function here
@@ -65,6 +77,9 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         Log.d("day",day);
         holder.flightDepartureTimeView.setText(myFlightData.get(position).getFlightTime().getTime().toString());
         holder.flightDepartureDateView.setText(myFlightData.get(position).getFlightDate().getTime().toString());
+
+
+
 
     }
 
