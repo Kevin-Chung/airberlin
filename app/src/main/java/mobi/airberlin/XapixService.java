@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import mobi.airberlin.flightlist.FlightListActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -68,11 +69,14 @@ public class XapixService {
                 if (!response.isSuccessful()) {
                     throw new IOException("Unexpected code " + response);
                 } else {
-                    cleanFlightInfo(response.body());
-                    Intent intent = new Intent(context,FlightActivity.class);
+                    ArrayList<FlightModel> fList = cleanFlightInfo(response.body());
                     for(FlightModel fm:fmList){
                         Log.d("Printing flight data",fm.toString());
                     }
+                    Intent intent = new Intent(context,FlightListActivity.class);
+                    intent.putExtra("flightData",fList);
+                    context.startActivity(intent);
+
                 }
                 response.close();
             }

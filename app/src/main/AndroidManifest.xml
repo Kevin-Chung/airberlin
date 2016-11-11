@@ -19,7 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".FlightActivity" />
-        <activity android:name=".FlightInformation"></activity>
+        <activity android:name=".FlightInformation" />
+        <activity
+            android:name=".flightlist.FlightListActivity"
+            android:label="@string/title_activity_flight_list"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
