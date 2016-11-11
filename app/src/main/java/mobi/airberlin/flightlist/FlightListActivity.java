@@ -53,16 +53,16 @@ public class FlightListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         // I don't think intent is null, so check if flight data is null
-        myFLightData = (ArrayList<FlightModel>) intent.getSerializableExtra("flightData");
+
+        myFLightData = initData();
         if(myFLightData !=null) {
             // if flight activity is not null then that means you already were in this activity
-            Log.d("myflightdata", myFLightData.size() + "");
-
+            Log.d("testing",((FlightModel)intent.getSerializableExtra("flightmodel")).getDestinationA());
+            myFLightData.add(0,(FlightModel)intent.getSerializableExtra("flightmodel"));
         }else{
             // if flight data is null that means you are in this activity for the first time
-            myFLightData = initData();
         }
-
+        Log.d("myflightdata", myFLightData.size() + "");
         mAdapter = new FlightListAdapter(myFLightData);
         mRecyclerView.setAdapter(mAdapter);
 

@@ -175,5 +175,11 @@
         android:layout_marginBottom="15dp"
         />
 
+    <Button
+        android:text="Book Flight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/book_flight" />
+
 </LinearLayout>
 </ScrollView>
