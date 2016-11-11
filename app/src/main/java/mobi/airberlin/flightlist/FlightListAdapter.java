@@ -1,9 +1,12 @@
 package mobi.airberlin.flightlist;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -18,18 +21,32 @@ import mobi.airberlin.R;
 public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightListHolder> {
     private ArrayList<FlightModel> myFlightData;
 
-    public static class FlightListHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+    public static class FlightListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView pointATextView;
         public TextView pointBTextView;
         public TextView flightDepartureTimeView;
         public TextView flightDepartureDateView;
+        public RelativeLayout cardFullLayout;
         public FlightListHolder(View v) {
             super(v);
             pointATextView =(TextView) v.findViewById(R.id.flight_list_from);
             pointBTextView=(TextView) v.findViewById(R.id.flight_list_to);
             flightDepartureDateView = (TextView) v.findViewById(R.id.flight_list_date);
             flightDepartureTimeView = (TextView) v.findViewById(R.id.flight_list_time);
+            cardFullLayout = (RelativeLayout) v.findViewById(R.id.flight_card_full_layout);
+            cardFullLayout.setOnClickListener(this);
+        }
+        @Override
+        public void onClick(View v)
+        {
+            int position  =   getAdapterPosition();
+            switch (v.getId()) {
+                case R.id.flight_card_full_layout:
+                    Snackbar.make(v, "Selected"+position, Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    break;
+            }
+
         }
 
         //TODO:potentially add setter function here
@@ -56,6 +73,8 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         //TODO: get date and time a better way
         holder.flightDepartureTimeView.setText(myFlightData.get(position).getFlightTime().getTime().toString());
         holder.flightDepartureDateView.setText(myFlightData.get(position).getFlightDate().getTime().toString());
+        if(position%2==0)holder.cardFullLayout.setBackgroundColor(000000);
+
 
     }
 
