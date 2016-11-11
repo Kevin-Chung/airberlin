@@ -1,5 +1,6 @@
 package mobi.airberlin.flightlist;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,12 +18,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import mobi.airberlin.FlightActivity;
 import mobi.airberlin.FlightModel;
 import mobi.airberlin.R;
 
 public class FlightListActivity extends AppCompatActivity {
     ArrayList<FlightModel> myFLightData;
-
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class FlightListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_flight_list);
 
         //create fake 3 flights
-
+        context=this;
 
         mRecyclerView = (RecyclerView)findViewById(R.id.flightList);
 
@@ -70,8 +72,8 @@ public class FlightListActivity extends AppCompatActivity {
         addFlightFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This button should add a flight", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(context,FlightActivity.class);
+                startActivity(intent);
             }
         });
         FloatingActionButton lighteningFab = (FloatingActionButton) findViewById(R.id.floatingActionLightening);
