@@ -55,12 +55,16 @@ public class FlightListActivity extends AppCompatActivity {
         // I don't think intent is null, so check if flight data is null
 
         myFLightData = initData();
-        if(myFLightData !=null) {
+        FlightModel temp = (FlightModel)intent.getSerializableExtra("flightmodel");
+        ArrayList<FlightModel> tempList = (ArrayList<FlightModel>)intent.getSerializableExtra("flightData");
+        if(temp !=null) {
             // if flight activity is not null then that means you already were in this activity
             Log.d("testing",((FlightModel)intent.getSerializableExtra("flightmodel")).getDestinationA());
             myFLightData.add(0,(FlightModel)intent.getSerializableExtra("flightmodel"));
-        }else{
-            // if flight data is null that means you are in this activity for the first time
+        }else if (tempList !=null){
+            //if tempList is not  null, then that means we are coming from the xapix service and we need to
+            //override flight data
+            myFLightData = tempList; 
         }
         Log.d("myflightdata", myFLightData.size() + "");
         mAdapter = new FlightListAdapter(myFLightData);
@@ -111,7 +115,7 @@ public class FlightListActivity extends AppCompatActivity {
             cal2.set(Calendar.HOUR_OF_DAY,23);
             cal2.set(Calendar.MINUTE,30);
             //CALENDAR IS FREAKING MUTABLE. WHYYYYY
-            fmList.add(new FlightModel("ADODD", 246.11, 2104.50, 34.11, "DFW", "PMI", "ECOFLEX", "BOEING 747", cal, cal2, "abcd"));
+            fmList.add(new FlightModel("ADODD", 246.11, 2104.50, 34.11, "TXL", "PMI", "ECOFLEX", "BOEING 747", cal, cal2, "abcd"));
 
             tempDate = "2016-12-30";
             date = sdf.parse(tempDate);
@@ -126,7 +130,7 @@ public class FlightListActivity extends AppCompatActivity {
             cal2.setTime(date);
             cal2.set(Calendar.HOUR_OF_DAY,20);
             cal2.set(Calendar.MINUTE,30);
-            fmList.add(new FlightModel("CFDAD", 346.11, 2904.80, 34.11, "PMI", "DFW", "FIRSTCLASS", "BOEING 747", cal, cal2, "abcd"));
+            fmList.add(new FlightModel("CFDAD", 346.11, 2904.80, 34.11, "PMI", "TXL", "FIRSTCLASS", "BOEING 747", cal, cal2, "abcd"));
 
             tempDate = "2017-01-30";
             date = sdf.parse(tempDate);
@@ -139,7 +143,7 @@ public class FlightListActivity extends AppCompatActivity {
             cal2.setTime(date);
             cal2.set(Calendar.HOUR_OF_DAY,18);
             cal2.set(Calendar.MINUTE,30);
-            fmList.add(new FlightModel("ZDFFA", 246.11, 2104.50, 34.11, "DFW", "PMI", "ECOFLEX", "BOEING 747", cal, cal2, "abcd"));
+            fmList.add(new FlightModel("ZDFFA", 246.11, 2104.50, 34.11, "TXL", "PMI", "ECOFLEX", "BOEING 747", cal, cal2, "abcd"));
 
             return fmList;
         }catch(Exception e){
