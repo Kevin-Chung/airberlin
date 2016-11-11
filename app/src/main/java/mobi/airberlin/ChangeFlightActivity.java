@@ -26,7 +26,8 @@ public class ChangeFlightActivity extends AppCompatActivity {
 
         //skip for now. Fire intent to go to a new class immediately
 
-        
+        intent = new Intent(this,GoogleActivity.class);
+        startActivity(intent);
 
 
     }

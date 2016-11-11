@@ -67,6 +67,7 @@ public class FlightListActivity extends AppCompatActivity {
         }else if (tempList !=null){
             //if tempList is not  null, then that means we are coming from the xapix service and we need to
             //override flight data
+            Log.d("temptlist","notNULl");
             myFLightData = tempList;
         }
         Log.d("myflightdata", myFLightData.size() + "");

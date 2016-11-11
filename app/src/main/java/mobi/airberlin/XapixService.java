@@ -75,12 +75,6 @@ public class XapixService {
                         Log.d("Printing flight data",fm.toString());
                     }
 
-                    // store list of selections in sharedpreferences
-                    SharedPreferences sp = context.getSharedPreferences("airberlin",Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sp.edit();
-
-
-
                     Intent intent = new Intent(context,FlightListActivity.class);
                     intent.putExtra("flightData",fList);
                     context.startActivity(intent);

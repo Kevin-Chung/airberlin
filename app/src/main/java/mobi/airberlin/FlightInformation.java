@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -23,8 +24,10 @@ public class FlightInformation extends AppCompatActivity {
             context=this;
 
         Intent intent = getIntent();
-
-        if(intent.getBooleanExtra("warning",false)){
+        Log.d("LOGGIN BOOl",intent.getBooleanExtra("warning",false)+"");
+        boolean isWarn = intent.getBooleanExtra("warning",false);
+        if(isWarn==true){
+            Log.d("CHANGING","changing to visilbe");
             LinearLayout temp = (LinearLayout)findViewById(R.id.warning_layout);
             temp.setVisibility(View.VISIBLE);
             Button tempButton = (Button)findViewById(R.id.book_flight);
