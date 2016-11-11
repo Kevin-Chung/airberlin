@@ -67,7 +67,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
     public void onBindViewHolder(FlightListAdapter.FlightListHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-
+        Log.d("myflightdata", myFlightData.size() + " "+position);
         holder.pointATextView.setText(myFlightData.get(position).getDestinationA());
         holder.pointBTextView.setText(myFlightData.get(position).getDestingationB());
         //TODO: get date and time a better way
@@ -82,9 +82,6 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         if(position%2==0)holder.cardFullLayout.setBackgroundColor(000000);
 
 
-
-
-
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -97,6 +94,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
     public FlightListAdapter(ArrayList<FlightModel> myFlightData)
     {
         this.myFlightData = myFlightData;
+        Log.d("inside adapter","flight data size"+myFlightData.size());
     }
 
 }
