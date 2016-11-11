@@ -55,8 +55,6 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        //TODO:potentially add setters to the holder class
-        //TODO:actually set data based on the class given to me
         holder.pointATextView.setText(myFlightData[position].getDestinationA());
         holder.pointBTextView.setText(myFlightData[position].getDestingationB());
         holder.flightDepartureTimeView.setText(myFlightData[position].getFlightTime().toString());

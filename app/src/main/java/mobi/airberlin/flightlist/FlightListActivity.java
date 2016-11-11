@@ -30,7 +30,6 @@ public class FlightListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        //TODO::Need some sort of class that holds flight data problably.
 
         myFLightData = (FlightModel[])savedInstanceState.getSerializable("flightData");
         mAdapter = new FlightListAdapter(myFLightData);
