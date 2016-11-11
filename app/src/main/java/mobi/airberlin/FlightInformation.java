@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import mobi.airberlin.flightlist.FlightListActivity;
@@ -22,6 +23,14 @@ public class FlightInformation extends AppCompatActivity {
             context=this;
 
         Intent intent = getIntent();
+
+        if(intent.getBooleanExtra("warning",false)){
+            LinearLayout temp = (LinearLayout)findViewById(R.id.warning_layout);
+            temp.setVisibility(View.VISIBLE);
+            Button tempButton = (Button)findViewById(R.id.book_flight);
+            tempButton.setVisibility(View.GONE);
+        }
+
         fm = (FlightModel)intent.getSerializableExtra("flightmodel");
 
         TextView tv = (TextView)findViewById(R.id.flight_list_from);
@@ -48,6 +57,16 @@ public class FlightInformation extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, FlightListActivity.class);
                 intent.putExtra("flightmodel",fm);
+                startActivity(intent);
+            }
+        });
+
+        Button changeFlight = (Button) findViewById(R.id.change_flight);
+        changeFlight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,ChangeFlightActivity.class);
+                intent.putExtra("flight",fm);
                 startActivity(intent);
             }
         });

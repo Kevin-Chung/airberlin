@@ -10,7 +10,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +21,8 @@
         <activity android:name=".FlightInformation" />
         <activity
             android:name=".flightlist.FlightListActivity"
-            android:label="@string/title_activity_flight_list"></activity>
+            android:label="@string/title_activity_flight_list" />
+        <activity android:name=".ChangeFlightActivity"></activity>
     </application>
 
 </manifest>

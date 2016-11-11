@@ -1,16 +1,19 @@
 package mobi.airberlin.flightlist;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -84,8 +87,25 @@ public class FlightListActivity extends AppCompatActivity {
         lighteningFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "oh no! flight delayed!", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                FlightModel fm = myFLightData.get(0);
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Oh no! We've just been notified by your airline that your flight "+fm.getFlightNumber()+" has unfortunately been canceled. \n Don't worry! Click Okay and we'll fix it for you. \n We apologize for the inconvenience!!")
+                        .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+                builder.create().show();
+
+                View v = mLayoutManager.findViewByPosition(0);
+                ImageView temp = (ImageView)v.findViewById(R.id.warning);
+                temp.setVisibility(View.VISIBLE );
+
             }
         });
     }

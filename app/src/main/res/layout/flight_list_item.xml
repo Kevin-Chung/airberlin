@@ -71,6 +71,18 @@
         android:layout_height="80dp"
         android:layout_alignParentRight="true"
         android:layout_margin="22dp"
-        android:src="@mipmap/ic_plane"/>
+        android:src="@mipmap/ic_plane"
+        android:id="@+id/imageView"/>
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:srcCompat="@drawable/ic_warning_24dp"
+        android:id="@+id/warning"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:visibility="gone"
+        android:tint="#ffe203"/>
 
 </RelativeLayout>

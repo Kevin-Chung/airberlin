@@ -53,9 +53,10 @@
         ></View>
 
     <LinearLayout
+        android:id="@+id/warning_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:visibility="gone"
+
         android:layout_height="wrap_content"
         >
 
@@ -63,13 +64,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_warning_24dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flight has been canceled!"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Change Flight"
-            android:layout_gravity="right"
-            android:id="@+id/change_flight"/>
+
+            android:id="@+id/change_flight"
+            android:layout_gravity="top|bottom|left|right|center_vertical|fill_vertical|center_horizontal|fill_horizontal" />
     </LinearLayout>
 
     <View

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -44,6 +45,11 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
             Snackbar.make(v,"yo",Snackbar.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), FlightInformation.class);
             intent.putExtra("flightmodel",myFlightData.get(getLayoutPosition()));
+
+            ImageView temp = (ImageView)v.findViewById(R.id.warning);
+            if(temp.getVisibility()==View.VISIBLE){
+                intent.putExtra("warning",true);
+            }
             v.getContext().startActivity(intent);
         }
 
