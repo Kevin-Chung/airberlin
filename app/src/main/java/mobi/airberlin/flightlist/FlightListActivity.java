@@ -11,7 +11,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import mobi.airberlin.FlightModel;
 import mobi.airberlin.R;
@@ -27,6 +31,9 @@ public class FlightListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_list);
 
+        //create fake 3 flights
+
+
         mRecyclerView = (RecyclerView)findViewById(R.id.flightList);
 
         //recycler view stuff************************
@@ -37,12 +44,26 @@ public class FlightListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        //TODO::Need some sort of class that holds flight data problably.
+        /*
+            add check, if this is our first time in the activity (intent is null) then
+            we don't try to fetch data from it
+         */
+
         Intent intent = getIntent();
-        myFLightData = (ArrayList<FlightModel>)intent.getSerializableExtra("flightData");
-        Log.d("myflightdata", myFLightData.size()+"");
+        // I don't think intent is null, so check if flight data is null
+        myFLightData = (ArrayList<FlightModel>) intent.getSerializableExtra("flightData");
+        if(myFLightData !=null) {
+            // if flight activity is not null then that means you already were in this activity
+            Log.d("myflightdata", myFLightData.size() + "");
+
+        }else{
+            // if flight data is null that means you are in this activity for the first time
+            myFLightData = initData();
+        }
+
         mAdapter = new FlightListAdapter(myFLightData);
         mRecyclerView.setAdapter(mAdapter);
+
 
         //Floating Action buttons**********************
         FloatingActionButton addFlightFab = (FloatingActionButton) findViewById(R.id.floatingActionAddFlight);
@@ -67,4 +88,62 @@ public class FlightListActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    public ArrayList<FlightModel> initData()  {
+
+        ArrayList<FlightModel> fmList = new ArrayList<>();
+        try {
+            //the departure time
+            Calendar cal = Calendar.getInstance();
+            //the arrival time
+            Calendar cal2 = Calendar.getInstance();
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String tempDate = "2016-12-20";
+            date = sdf.parse(tempDate);
+            cal.setTime(date);
+            //11:30 flight
+            cal.set(Calendar.HOUR_OF_DAY,11);
+            cal.set(Calendar.MINUTE,30);
+
+            cal2.setTime(date);
+            cal2.set(Calendar.HOUR_OF_DAY,23);
+            cal2.set(Calendar.MINUTE,30);
+            //CALENDAR IS FREAKING MUTABLE. WHYYYYY
+            fmList.add(new FlightModel("ADODD", 246.11, 2104.50, 34.11, "DFW", "PMI", "ECOFLEX", "BOEING 747", cal, cal2, "abcd"));
+
+            tempDate = "2016-12-30";
+            date = sdf.parse(tempDate);
+            cal = Calendar.getInstance();
+            cal2 = Calendar.getInstance();
+            cal.setTime(date);
+            // 8:45am flight
+            cal.set(Calendar.HOUR_OF_DAY,8);
+            cal.set(Calendar.MINUTE,45);
+
+
+            cal2.setTime(date);
+            cal2.set(Calendar.HOUR_OF_DAY,20);
+            cal2.set(Calendar.MINUTE,30);
+            fmList.add(new FlightModel("CFDAD", 346.11, 2904.80, 34.11, "PMI", "DFW", "FIRSTCLASS", "BOEING 747", cal, cal2, "abcd"));
+
+            tempDate = "2017-01-30";
+            date = sdf.parse(tempDate);
+            cal = Calendar.getInstance();
+            cal2 = Calendar.getInstance();
+            cal.setTime(date);
+            //6 am flight
+            cal.set(Calendar.HOUR_OF_DAY,6);
+
+            cal2.setTime(date);
+            cal2.set(Calendar.HOUR_OF_DAY,18);
+            cal2.set(Calendar.MINUTE,30);
+            fmList.add(new FlightModel("ZDFFA", 246.11, 2104.50, 34.11, "DFW", "PMI", "ECOFLEX", "BOEING 747", cal, cal2, "abcd"));
+
+            return fmList;
+        }catch(Exception e){
+            Log.d("error in init","error in inti");
+
+        }
+        return null;
+    }
 }

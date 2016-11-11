@@ -1,12 +1,15 @@
 package mobi.airberlin.flightlist;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import mobi.airberlin.FlightModel;
 import mobi.airberlin.R;
@@ -54,6 +57,12 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         holder.pointATextView.setText(myFlightData.get(position).getDestinationA());
         holder.pointBTextView.setText(myFlightData.get(position).getDestingationB());
         //TODO: get date and time a better way
+        Calendar cal = myFlightData.get(position).getFlightDate();
+        Date date = cal.getTime();
+        String hour = date.getHours()+"";
+        String minute = date.getMinutes()+"";
+        String day = date.getDay()+"";
+        Log.d("day",day);
         holder.flightDepartureTimeView.setText(myFlightData.get(position).getFlightTime().getTime().toString());
         holder.flightDepartureDateView.setText(myFlightData.get(position).getFlightDate().getTime().toString());
 
