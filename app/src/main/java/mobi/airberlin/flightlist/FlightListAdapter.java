@@ -2,12 +2,14 @@ package mobi.airberlin.flightlist;
 
 import mobi.airberlin.FlightModel;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,6 +40,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
             pointBTextView=(TextView) v.findViewById(R.id.flight_list_to);
             flightDepartureDateView = (TextView) v.findViewById(R.id.flight_list_date);
             flightDepartureTimeView = (TextView) v.findViewById(R.id.flight_list_time);
+            cardFullLayout = (RelativeLayout) v.findViewById(R.id.realative_full_layout);
             v.setOnClickListener(this);
         }
 
@@ -46,6 +49,11 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
             Snackbar.make(v,"yo",Snackbar.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), FlightInformation.class);
             intent.putExtra("flightmodel",myFlightData.get(getLayoutPosition()));
+
+            ImageView temp = (ImageView)v.findViewById(R.id.warning);
+            if(temp.getVisibility()==View.VISIBLE){
+                intent.putExtra("warning",true);
+            }
             v.getContext().startActivity(intent);
         }
 
@@ -79,8 +87,7 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         Log.d("day",day);
         holder.flightDepartureTimeView.setText(myFlightData.get(position).getFlightTime().getTime().toString());
         holder.flightDepartureDateView.setText(myFlightData.get(position).getFlightDate().getTime().toString());
-        if(position%2==0)holder.cardFullLayout.setBackgroundColor(000000);
-
+        if(position%2==0)holder.cardFullLayout.setBackgroundColor(Color.WHITE);
 
     }
 

@@ -2,6 +2,7 @@ package mobi.airberlin;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -73,6 +74,7 @@ public class XapixService {
                     for(FlightModel fm:fmList){
                         Log.d("Printing flight data",fm.toString());
                     }
+
                     Intent intent = new Intent(context,FlightListActivity.class);
                     intent.putExtra("flightData",fList);
                     context.startActivity(intent);
