@@ -1,5 +1,7 @@
 package mobi.airberlin.flightlist;
 
+import mobi.airberlin.FlightModel;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,8 +12,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
-import mobi.airberlin.FlightModel;
+import mobi.airberlin.FlightInformation;
 import mobi.airberlin.R;
 
 /**
@@ -21,7 +25,8 @@ import mobi.airberlin.R;
 public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.FlightListHolder> {
     private ArrayList<FlightModel> myFlightData;
 
-    public static class FlightListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+    public class FlightListHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView pointATextView;
         public TextView pointBTextView;
         public TextView flightDepartureTimeView;
@@ -33,20 +38,15 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
             pointBTextView=(TextView) v.findViewById(R.id.flight_list_to);
             flightDepartureDateView = (TextView) v.findViewById(R.id.flight_list_date);
             flightDepartureTimeView = (TextView) v.findViewById(R.id.flight_list_time);
-            cardFullLayout = (RelativeLayout) v.findViewById(R.id.flight_card_full_layout);
-            cardFullLayout.setOnClickListener(this);
+            v.setOnClickListener(this);
         }
-        @Override
-        public void onClick(View v)
-        {
-            int position  =   getAdapterPosition();
-            switch (v.getId()) {
-                case R.id.flight_card_full_layout:
-                    Snackbar.make(v, "Selected"+position, Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                    break;
-            }
 
+        @Override
+        public void onClick(View v) {
+            Snackbar.make(v,"yo",Snackbar.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), FlightInformation.class);
+            intent.putExtra("flightmodel",myFlightData.get(getLayoutPosition()));
+            v.getContext().startActivity(intent);
         }
 
         //TODO:potentially add setter function here
@@ -71,9 +71,18 @@ public class FlightListAdapter extends RecyclerView.Adapter<FlightListAdapter.Fl
         holder.pointATextView.setText(myFlightData.get(position).getDestinationA());
         holder.pointBTextView.setText(myFlightData.get(position).getDestingationB());
         //TODO: get date and time a better way
+        Calendar cal = myFlightData.get(position).getFlightDate();
+        Date date = cal.getTime();
+        String hour = date.getHours()+"";
+        String minute = date.getMinutes()+"";
+        String day = date.getDay()+"";
+        Log.d("day",day);
         holder.flightDepartureTimeView.setText(myFlightData.get(position).getFlightTime().getTime().toString());
         holder.flightDepartureDateView.setText(myFlightData.get(position).getFlightDate().getTime().toString());
         if(position%2==0)holder.cardFullLayout.setBackgroundColor(000000);
+
+
+
 
 
     }

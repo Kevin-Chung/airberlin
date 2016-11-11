@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, FlightActivity.class);
+                Intent intent = new Intent(context, FlightListActivity.class);
                 startActivity(intent);
             }
         });

@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="124dp"
+    android:layout_height="170dp"
     android:layout_gravity="center"
-    android:background="#aaaaaa"
-    android:id="@+id/flight_card_full_layout">
+    android:background="#a6b0ec">
     <LinearLayout
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
@@ -40,17 +39,32 @@
         </LinearLayout>
 
         <TextView
+            android:text="Departure Time:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+
+            android:layout_weight="1" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id = "@+id/flight_list_date"
             android:text="Date"
             android:textSize="16sp"/>
+
+        <TextView
+            android:text="Arrival Time:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/flight_list_time"
             android:text="Time"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
     <ImageView
         android:layout_width="80dp"
