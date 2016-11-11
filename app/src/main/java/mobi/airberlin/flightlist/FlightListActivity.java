@@ -44,11 +44,6 @@ public class FlightListActivity extends AppCompatActivity {
         mAdapter = new FlightListAdapter(myFLightData);
         mRecyclerView.setAdapter(mAdapter);
 
-
-
-
-
-
         //Floating Action buttons**********************
         FloatingActionButton addFlightFab = (FloatingActionButton) findViewById(R.id.floatingActionAddFlight);
         addFlightFab.setOnClickListener(new View.OnClickListener() {

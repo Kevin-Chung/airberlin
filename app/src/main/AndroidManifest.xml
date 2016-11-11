@@ -22,8 +22,7 @@
         <activity android:name=".FlightInformation" />
         <activity
             android:name=".flightlist.FlightListActivity"
-            android:label="@string/title_activity_flight_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_flight_list"></activity>
     </application>
 
 </manifest>
