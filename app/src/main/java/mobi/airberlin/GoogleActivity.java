@@ -1,22 +1,5 @@
 package mobi.airberlin;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
-import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
-
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.ExponentialBackOff;
-
-import com.google.api.services.calendar.CalendarScopes;
-import com.google.api.client.util.DateTime;
-
-import com.google.api.services.calendar.model.*;
-
 import android.Manifest;
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -30,15 +13,34 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.DateTime;
+import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.calendar.CalendarScopes;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventAttendee;
+import com.google.api.services.calendar.model.EventDateTime;
+import com.google.api.services.calendar.model.Events;
+
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -46,7 +48,7 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class GoogleActivity extends Activity
+public class GoogleActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
@@ -76,7 +78,6 @@ public class GoogleActivity extends Activity
             @Override
             public void onClick(View v) {
                 mCallApiButton.setEnabled(false);
-                mOutputText.setText("");
                 getResultsFromApi();
                 mCallApiButton.setEnabled(true);
             }
@@ -90,6 +91,9 @@ public class GoogleActivity extends Activity
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
+
+        ActionBar aBar = getSupportActionBar();
+
     }
 
 
@@ -307,6 +311,8 @@ public class GoogleActivity extends Activity
                     transport, jsonFactory, credential)
                     .setApplicationName("Google Calendar API Android Quickstart")
                     .build();
+
+
         }
 
         /**
@@ -329,7 +335,7 @@ public class GoogleActivity extends Activity
          * @return List of Strings describing returned events.
          * @throws IOException
          */
-        private List<String> getDataFromApi() throws IOException {
+        private List<String> getDataFromApi() throws IOException, ParseException {
             // List the next 10 events from the primary calendar.
             DateTime now = new DateTime(System.currentTimeMillis());
             List<String> eventStrings = new ArrayList<String>();
@@ -343,10 +349,46 @@ public class GoogleActivity extends Activity
 
             for (Event event : items) {
                 DateTime start = event.getStart().getDateTime();
+                String eventId = event.getId();
+
+
+                //delete this event
+                mService.events().delete("primary", eventId).execute();
+                Log.d("deleted Event",eventId);
+
+                //create new event
+                //time 2016-11-15T14:42:31-06:00
+                Event newEvent = new Event();
+                newEvent.setSummary("Super important meeting");
+                newEvent.setDescription("Apologies, this meeting had to be moved due to a flight delay");
+
+                DateTime dateStartTime = new DateTime("2016-11-16T14:42:31-06:00");
+                EventDateTime eventStartTime = new EventDateTime().
+                        setDateTime(dateStartTime);
+                newEvent.setStart(eventStartTime);
+
+
+                DateTime dateEndTime = new DateTime("2016-11-16T15:12:31-06:00");
+                EventDateTime eventEndTime = new EventDateTime()
+                        .setDateTime(dateEndTime);
+                newEvent.setEnd(eventEndTime);
+
+                newEvent = mService.events().insert("primary", newEvent).execute();
+                Log.d("Event created: %s", event.getHtmlLink());
+
+
+                EventAttendee[] attendees = new EventAttendee[] {
+                        new EventAttendee().setEmail("kvnchung92@gmail.com")
+                };
+                newEvent.setAttendees(Arrays.asList(attendees));
+
+
+
+
                 if (start == null) {
                     // All-day events don't have start times, so just use
                     // the start date.
-                    start = event.getStart().getDate();
+                    start = event.getStart().getDateTime();
                 }
                 eventStrings.add(
                         String.format("%s (%s)", event.getSummary(), start));
