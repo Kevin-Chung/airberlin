@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -63,6 +64,7 @@ public class GoogleActivity extends AppCompatActivity
     private static final String BUTTON_TEXT = "Call Google Calendar API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = { CalendarScopes.CALENDAR_READONLY,CalendarScopes.CALENDAR };
+    private Context context;
 
     /**
      * Create the main activity.
@@ -73,7 +75,7 @@ public class GoogleActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google);
 
-        mCallApiButton = (Button)findViewById(R.id.calendar_api_button);
+        mCallApiButton = (Button)findViewById(R.id.change_flight_button);
         mCallApiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +93,7 @@ public class GoogleActivity extends AppCompatActivity
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
+        context = this;
 
         ActionBar aBar = getSupportActionBar();
 
@@ -412,6 +415,8 @@ public class GoogleActivity extends AppCompatActivity
                 //here is what happens when google call is made
                 output.add(0, "Data retrieved using the Google Calendar API:\n\n");
                 mOutputText.setText(TextUtils.join("\n\n", output));
+                Toast.makeText(context,"We have updated your calendar and notified members",Toast.LENGTH_SHORT).show();
+
             }
         }
 

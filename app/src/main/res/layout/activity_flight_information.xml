@@ -89,9 +89,10 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="flight_time"
+        android:text="Flight Time "
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:textSize="24dp"
         android:layout_marginBottom="15dp"
         />
 
@@ -115,10 +116,11 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:text="flight_price"
+        android:text="Flight Price"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
+        android:textSize="24dp"
         />
 
     <TextView
@@ -140,10 +142,11 @@
         ></View>
     <TextView
         android:layout_width="wrap_content"
-        android:text="flight_seat"
+        android:text="Flight Seat"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
+        android:textSize="24dp"
         />
 
     <TextView
@@ -166,9 +169,10 @@
         ></View>
     <TextView
         android:layout_width="wrap_content"
-        android:text="flight_plane"
+        android:text="Flight Plane"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
+        android:textSize="24dp"
         android:layout_marginBottom="15dp"
         />
 
