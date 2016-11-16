@@ -48,12 +48,6 @@ public class FlightListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
-        /*
-            add check, if this is our first time in the activity (intent is null) then
-            we don't try to fetch data from it
-         */
-
         Intent intent = getIntent();
         // I don't think intent is null, so check if flight data is null
 
